@@ -1,0 +1,295 @@
+/* Estilo global */
+body {
+    background: linear-gradient(to bottom right, #0d1b2a, #1b263b);
+    color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilo do cabeçalho */
+header {
+    background-color: #1a1f2e;
+    padding: 5px;
+    text-align: center;
+    color: #d1b97f;
+    font-size: 15px;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* Container principal */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* Barra superior */
+.top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    padding: 5px;
+    font-size: 15px;
+}
+
+/* Formulário de datas */
+.data-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.data-form label {
+    font-size: 16px;
+    color: #ffffff;
+}
+
+.data-form input[type="date"] {
+    background-color: #1a1f2e;
+    border: 1px solid #d1b97f;
+    color: #ffffff;
+    padding: 8px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.data-form input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+
+.data-form input[type="date"]:focus {
+    outline: none;
+    border-color: #b89f67;
+    box-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+}
+
+/* Botão de filtrar */
+.data-form button[type="submit"],
+#btn-atualizar {
+    background-color: #b89f67;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.data-form button[type="submit"]:hover,
+#btn-atualizar:hover {
+    background-color: #d1b97f;
+}
+
+#btn-atualizar:disabled {
+    background-color: #8f7e54;
+    cursor: not-allowed;
+}
+
+/* Contêiner dos produtos */
+.produtos-info {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    margin: 20px 0;
+}
+
+/* Blocos dos produtos */
+.produto-bloco {
+    background-color: #1a1f2e;
+    color: #d1b97f;
+    flex: 15; /* Cada bloco de produto tem um fator de crescimento de 15 */
+    padding: 5px;
+    margin: 0 2px;
+    border-radius: 8px;
+    border: 1px solid #d1b97f;
+    text-align: center;
+    box-sizing: border-box;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    white-space: nowrap;
+}
+
+/* Bloco de "Vendas Totais" */
+.produto-bloco.vendas-totais {
+    flex: 10; /* O bloco "Vendas Totais" tem um fator de crescimento de 10 */
+    background-color: #d1b97f;
+    color: #ffffff
+}
+
+.produto-bloco h3 {
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #ffffff;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.produto-bloco p {
+    font-size: 12px;
+    margin: 2px 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Tabela de transações */
+table {
+    width: 100%;
+    margin: 20px 0;
+    border-collapse: collapse;
+    background-color: #1a1f2e;
+    color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+table th, table td {
+    padding: 10px;
+    border: 1px solid #d1b97f;
+    text-align: left;
+}
+
+table thead th {
+    background-color: #0d1b2a;
+    color: #d1b97f;
+    font-size: 16px;
+}
+
+table tbody tr:nth-child(even) {
+    background-color: #1b263b;
+}
+
+/* Paginação */
+.pagination {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.pagination a {
+    color: #d1b97f;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 16px;
+}
+
+.pagination a:hover {
+    text-decoration: underline;
+}
+
+.pagination span {
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* Notificação centralizada */
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    display: none;
+}
+
+#center-notification {
+    display: none;
+    position: fixed;
+    z-index: 1001;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #1a1f2e;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    width: 300px;
+    max-width: 80%;
+}
+
+#center-notification img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 20px;
+}
+
+#center-notification p {
+    font-size: 18px;
+    margin: 0;
+    color: #ffffff;
+}
+
+/* Animações */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -60%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+    to {
+        opacity: 0;
+        transform: translate(-50%, -40%);
+    }
+}
+
+.center-notification.fade-in {
+    display: block;
+    animation: fadeIn 0.5s ease forwards;
+}
+
+.center-notification.fade-out {
+    animation: fadeOut 0.5s ease forwards;
+}
+
+/* Links */
+a {
+    color: #d1b97f;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Estilos para o botão de limpar filtros */
+.data-form a {
+    margin-left: 5px; /* Espaçamento entre o botão Filtrar e o botão Limpar Filtros */
+}
+
+.data-form a img {
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.data-form a img:hover {
+    transform: scale(1.1); /* Efeito de aumento ao passar o mouse */
+}
+
+/* Estilo para o botão de limpar filtros */
+.btn-close-filtro {
+    width: 20px; /* Defina a largura desejada */
+    height: 20px; /* Defina a altura desejada */
+    cursor: pointer; /* Muda o cursor para indicar que é clicável */
+    transition: transform 0.2s; /* Adiciona uma transição suave */
+}
+
+.btn-close-filtro:hover {
+    transform: scale(1.1); /* Efeito de aumento ao passar o mouse */
+}

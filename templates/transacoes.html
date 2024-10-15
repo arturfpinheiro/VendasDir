@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Transações</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilo.css') }}">
+</head>
+<body>
+<header>
+    <h1>Lista de Transações</h1>
+</header>
+
+<!-- Notificações e Overlay -->
+<div id="overlay" class="overlay" style="display: none;"></div>
+<div id="center-notification" class="center-notification" style="display: none;">
+    <img id="center-notification-icon" src="{{ url_for('static', filename='images/check.png') }}" alt="check">
+    <p id="center-notification-text"></p>
+</div>
+
+<div class="container">
+    <div class="top-bar">
+        <form method="GET" action="{{ url_for('listar_transacoes') }}" class="data-form">
+            <label for="start_date">Data Início:</label>
+            <input type="date" name="start_date" id="start_date" value="{{ start_date }}">
+            <label for="end_date">Data Fim:</label>
+            <input type="date" name="end_date" id="end_date" value="{{ end_date }}">
+            <button type="submit">Filtrar</button>
+            <!-- Botão de Limpar Filtros com imagem menor -->
+            <a href="{{ url_for('listar_transacoes') }}" title="Limpar Filtros">
+                <img src="{{ url_for('static', filename='images/close.png') }}" alt="Limpar Filtros" width="15"
+                     height="15">
+            </a>
+        </form>
+        <button id="btn-atualizar" onclick="atualizarVendas()">Atualizar</button>
+    </div>
+
+    <!-- Script JavaScript -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+    <div class="produtos-info">
+        <div class="produto-bloco">
+            <h3>Rota do Conhecimento</h3>
+            <p>Quantidade Vendida: {{ produtos['Rota do Conhecimento']['quantidade'] }}</p>
+            <p>Valor Total: {{ produtos['Rota do Conhecimento']['valor_formatado'] }}</p>
+        </div><!--
+ -->
+        <div class="produto-bloco">
+            <h3>O Poder do Básico</h3>
+            <p>Quantidade Vendida: {{ produtos['O Poder do Básico']['quantidade'] }}</p>
+            <p>Valor Total: {{ produtos['O Poder do Básico']['valor_formatado'] }}</p>
+        </div><!--
+ -->
+        <div class="produto-bloco">
+            <h3>MI Liderança</h3>
+            <p>Quantidade Vendida: {{ produtos['MI Liderança']['quantidade'] }}</p>
+            <p>Valor Total: {{ produtos['MI Liderança']['valor_formatado'] }}</p>
+        </div><!--
+ -->
+        <div class="produto-bloco">
+            <h3>LS Club</h3>
+            <p>Quantidade Vendida: {{ produtos['LS Club']['quantidade'] }}</p>
+            <p>Valor Total: {{ produtos['LS Club']['valor_formatado'] }}</p>
+        </div><!--
+ -->
+        <div class="produto-bloco">
+            <h3>Imersão Evolution</h3>
+            <p>Quantidade Vendida: {{ produtos['Imersão Evolution']['quantidade'] }}</p>
+            <p>Valor Total: {{ produtos['Imersão Evolution']['valor_formatado'] }}</p>
+        </div><!--
+ -->
+        <div class="produto-bloco">
+            <h3>Evolution Online</h3>
+            <p>Quantidade Vendida: {{ produtos['Evolution Online']['quantidade'] }}</p>
+            <p>Valor Total: {{ produtos['Evolution Online']['valor_formatado'] }}</p>
+        </div><!--
+ -->
+        <div class="produto-bloco vendas-totais">
+            <h3>Vendas Totais</h3>
+            <p>Quantidade Vendida: {{ total_vendas }}</p>
+            <p>Valor Total: {{ valor_total }}</p>
+        </div>
+    </div>
+
+    <!-- Tabela de Transações -->
+    <table>
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>ID Hotmart</th>
+            <th>Produto</th>
+            <th>Comprador</th>
+            <th>Valor</th>
+            <th>Data</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for transacao in transacoes.items %}
+        <tr>
+            <td>{{ loop.index + (transacoes.page - 1) * transacoes.per_page }}</td>
+            <td>{{ transacao.id_transacao_hotmart }}</td>
+            <td>{{ transacao.produto }}</td>
+            <td>{{ transacao.comprador }}</td>
+            <td>{{ transacao.valor_formatado }}</td>
+            <td>{{ transacao.data_aprovacao.strftime('%d/%m/%Y') }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Paginação -->
+    <div class="pagination">
+        {% if transacoes.has_prev %}
+        <a href="{{ url_for('listar_transacoes', page=transacoes.prev_num, start_date=start_date, end_date=end_date) }}">«
+            Anterior</a>
+        {% endif %}
+        <span>Página {{ transacoes.page }} de {{ transacoes.pages }}</span>
+        {% if transacoes.has_next %}
+        <a href="{{ url_for('listar_transacoes', page=transacoes.next_num, start_date=start_date, end_date=end_date) }}">Próximo
+            »</a>
+        {% endif %}
+    </div>
+</div>
+</body>
+</html>
